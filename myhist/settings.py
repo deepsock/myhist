@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -57,10 +59,7 @@ WSGI_APPLICATION = 'myhist.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
 
 # Internationalization
@@ -81,3 +80,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
